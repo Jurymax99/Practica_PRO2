@@ -32,7 +32,6 @@ public:
     void escribir_frec();
     void escribir_cod();
     void escribir_treecode();
-    //void escribir_cod(const vector <Key>& aux);
 };
 
 Language::Language(){
@@ -86,7 +85,7 @@ void Language::crea_codes(){
         tab_codes[i].second=code;        
     }
 }
-
+//Ignorar
 string Language::codificar_caracter(const Tree& a, string& code, const string& aux){
     if(a.empty() and code!= aux) return "A";        
     else return "B";
@@ -96,7 +95,12 @@ void Language::tomeu_coding(const Tree& a,string& code){
     if(a.empty()){
         tab_codes.push_back(make_pair(a.value().first,code));
     }
-    else 
+    else{
+        tomeu_coding(a.left(),code +="0");
+        code.pop_back();
+        tomeu_coding(a.right(),code +="1");
+        code.pop_back();   
+    }
 }
     
 void Language::leer(){
@@ -104,13 +108,10 @@ void Language::leer(){
     cin >> size;
     set<Tree, less<Tree>> nodes;
     for(int i=0;i<size;++i){
-        string s;
-        int n;
-        cin >> s >> n;
-        Key aux=make_pair(s,n);
+        Key aux;
+        cin >> aux.first >> aux.second;
         tab_frec.push_back(aux);
         nodes.insert(Tree(aux));
-        
     }
     treecode=crea_tree(nodes);
     string code;
@@ -154,7 +155,7 @@ void Language::escribir_treecode_in(const Tree& tc){
         escribir_treecode_in(tc.right());
     }
 }
-
+//Main temp
 int main(){
     Language i;
     i.leer();
