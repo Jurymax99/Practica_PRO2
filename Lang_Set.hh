@@ -1,3 +1,6 @@
+#ifndef LANG_SET_HH
+#define LANG_SET_HH
+
 #include "Language.hh"
 #include <map>
 
@@ -17,3 +20,5 @@ public:
     void escribir_cod(string name);
     void escribir_treecode(string name);
 };
+
+#endif
